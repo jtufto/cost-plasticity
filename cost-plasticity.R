@@ -9,7 +9,7 @@ i <- rep(1:m, each=10)
 n <- length(i)
 
 # True parameter values
-G <- diag(c(1,.2)) # G-matrix
+G <- diag(c(1,.1)) # G-matrix
 sigma_E <- 1
 abbarbar <- c(0,.5) # mean elevation and slope in the population
 beta <- c(0,1,-.2,.5,0)
@@ -37,7 +37,7 @@ parameters <- list(abbarbar = abbarbar,
 map <- list(
   beta = factor(c(1,2,3,4,NA))
 )
-obj <- MakeADFun(data, parameters, DLL="cost_plasticity", random = c("abbar","ab"))
+obj <- MakeADFun(data, parameters, DLL="cost_plasticity", random = c("abbar","ab"), map=map)
 
 # Fit the model
 fit <- nlminb(obj$par, obj$fn, obj$gr)
